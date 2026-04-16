@@ -5,7 +5,6 @@ import { User, Mail, Phone, CreditCard, ShieldCheck, Loader2, Save } from "lucid
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
-type PerfilData = Record<string, unknown>;
 
 function Field({
   label,
