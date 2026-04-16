@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth } from "@/state/auth";
-import { obterPerfil, atualizarPerfil } from "@/lib/api";
+import { obterPerfil, criarPerfil, atualizarPerfil } from "@/lib/api";
 import { User, Mail, Phone, CreditCard, ShieldCheck, Loader2, Save } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
@@ -44,7 +44,7 @@ function StyledInput({ className, ...props }: React.InputHTMLAttributes<HTMLInpu
 
 export function AdminPerfilPage() {
   const { token, user } = useAuth();
-  const [, setPerfil] = React.useState<PerfilData | null>(null);
+  const [perfilExiste, setPerfilExiste] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
   const [saving, setSaving] = React.useState(false);
   const [nome, setNome] = React.useState("");
@@ -58,12 +58,13 @@ export function AdminPerfilPage() {
     obterPerfil(token)
       .then((data) => {
         if (!alive) return;
-        setPerfil(data);
         if (data) {
+          setPerfilExiste(true);
           setNome(String(data.nome ?? user?.nome ?? ""));
           setCpf(String(data.cpf ?? ""));
           setTelefone(String(data.telefone ?? ""));
         } else {
+          setPerfilExiste(false);
           setNome(user?.nome ?? "");
         }
       })
@@ -80,8 +81,14 @@ export function AdminPerfilPage() {
       if (nome.trim()) payload.nome = nome.trim();
       if (cpf.trim()) payload.cpf = cpf.trim();
       if (telefone.trim()) payload.telefone = telefone.trim();
-      await atualizarPerfil(payload, token);
-      toast.success("Perfil atualizado");
+      if (perfilExiste) {
+        await atualizarPerfil(payload, token);
+        toast.success("Perfil atualizado");
+      } else {
+        await criarPerfil(payload, token);
+        setPerfilExiste(true);
+        toast.success("Perfil criado com sucesso");
+      }
     } finally {
       setSaving(false);
     }

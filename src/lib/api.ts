@@ -171,6 +171,17 @@ export function deletarProduto(id: string, token: string) {
 
 // --- Perfil (Admin) ---
 
+export function criarPerfil(
+  payload: { nome?: string; cpf?: string; telefone?: string },
+  token: string
+) {
+  return apiFetch<Record<string, unknown>>("/perfis/me", {
+    method: "POST",
+    body: JSON.stringify(payload),
+    token,
+  });
+}
+
 export function atualizarPerfil(
   payload: { nome?: string; cpf?: string; telefone?: string },
   token: string

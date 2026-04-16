@@ -186,18 +186,6 @@ export function ProdutoDetalhePage() {
             </div>
           </div>
 
-          {/* Thumbnail strip */}
-          <div className="grid grid-cols-4 gap-3">
-            {[...Array(4)].map((_, i) => (
-              <div
-                key={i}
-                className={cn(
-                  "aspect-square cursor-pointer overflow-hidden rounded-xl border bg-muted transition-all duration-150 hover:border-foreground/40",
-                  i === 0 ? "border-foreground ring-2 ring-foreground/20" : "border-border"
-                )}
-              />
-            ))}
-          </div>
         </div>
 
         {/* ── Right: product info ───────────────────── */}
