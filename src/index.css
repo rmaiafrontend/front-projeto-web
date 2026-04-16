@@ -1,6 +1,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,89 +12,134 @@ body,
   height: 100%;
 }
 
-body {
-  @apply bg-background text-foreground;
+@layer base {
+  :root {
+    --font-sans: 'Geist Variable', sans-serif;
+    --font-heading: 'Geist Variable', sans-serif;
+
+    /* Light mode — Indigo-tinted neutral palette */
+    --background:   0.985 0.003 270;      /* quase branco com toque frio */
+    --foreground:   0.13  0.025 270;      /* quase preto índigo */
+
+    --card:         1     0     0;
+    --card-foreground: 0.13 0.025 270;
+
+    --popover:      1     0     0;
+    --popover-foreground: 0.13 0.025 270;
+
+    /* Primary — Indigo vibrante */
+    --primary:          0.47  0.22  270;
+    --primary-foreground: 0.99 0    0;
+
+    --secondary:    0.94  0.01  270;
+    --secondary-foreground: 0.13 0.025 270;
+
+    --muted:        0.94  0.008 270;
+    --muted-foreground: 0.50 0.02  265;
+
+    /* Accent — Violeta suave */
+    --accent:       0.91  0.04  280;
+    --accent-foreground: 0.35 0.15 275;
+
+    --destructive:  0.577 0.245  27.325;
+
+    --border:       0.88  0.01  270;
+    --input:        0.91  0.008 270;
+    --ring:         0.47  0.22  270;
+
+    --radius: 0.625rem;
+
+    /* Sidebar */
+    --sidebar:          0.97  0.005 270;
+    --sidebar-foreground: 0.13 0.025 270;
+    --sidebar-primary:  0.47  0.22  270;
+    --sidebar-primary-foreground: 0.99 0 0;
+    --sidebar-accent:   0.91  0.04  280;
+    --sidebar-accent-foreground: 0.35 0.15 275;
+    --sidebar-border:   0.88  0.01  270;
+    --sidebar-ring:     0.47  0.22  270;
+  }
+
+  .dark {
+    --background:   0.09  0.015 270;
+    --foreground:   0.96  0.008 270;
+
+    --card:         0.12  0.016 270;
+    --card-foreground: 0.96 0.008 270;
+
+    --popover:      0.12  0.016 270;
+    --popover-foreground: 0.96 0.008 270;
+
+    /* Primary — Indigo claro no dark */
+    --primary:          0.62  0.20  270;
+    --primary-foreground: 0.99 0    0;
+
+    --secondary:    0.18  0.02  270;
+    --secondary-foreground: 0.96 0.008 270;
+
+    --muted:        0.18  0.015 270;
+    --muted-foreground: 0.60  0.02  265;
+
+    --accent:       0.25  0.06  280;
+    --accent-foreground: 0.80 0.10 275;
+
+    --destructive:  0.704 0.191  22.216;
+
+    --border:       0.22  0.02  270;
+    --input:        0.20  0.018 270;
+    --ring:         0.62  0.20  270;
+
+    --sidebar:          0.11  0.018 270;
+    --sidebar-foreground: 0.96 0.008 270;
+    --sidebar-primary:  0.62  0.20  270;
+    --sidebar-primary-foreground: 0.99 0 0;
+    --sidebar-accent:   0.25  0.06  280;
+    --sidebar-accent-foreground: 0.80 0.10 275;
+    --sidebar-border:   0.22  0.02  270;
+    --sidebar-ring:     0.62  0.20  270;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  html {
+    @apply font-sans scroll-smooth;
+  }
 }
 
-@layer base {
-  .theme {
-    --font-heading: var(--font-sans);
-    --font-sans: 'Geist Variable', sans-serif;
+@layer utilities {
+  .animate-in-up {
+    animation: fade-in-up 0.3s ease-out forwards;
   }
-  :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+
+  /* Gradient de destaque usando a cor primária */
+  .gradient-primary {
+    background: linear-gradient(135deg,
+      oklch(0.47 0.22 270),
+      oklch(0.55 0.22 290)
+    );
   }
-  .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+
+  .gradient-primary-soft {
+    background: linear-gradient(135deg,
+      oklch(0.94 0.04 270),
+      oklch(0.92 0.06 290)
+    );
   }
-  * {
-    @apply border-border outline-ring/50;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
   }
-  body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
